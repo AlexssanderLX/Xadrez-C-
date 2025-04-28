@@ -1,4 +1,4 @@
-﻿using tabuleiro;
+﻿/*using tabuleiro;
 
 namespace Xadrez
 {
@@ -13,4 +13,4 @@ namespace Xadrez
             return "C";
         }
     }
-}
+}*/
