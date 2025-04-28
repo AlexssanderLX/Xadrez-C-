@@ -12,19 +12,33 @@ namespace xadrez_console
                 PartidadeXadrez partida = new PartidadeXadrez();
                 while (!partida.terminada)
                 {
-                    Console.Clear();
-                    Tela.imprimirtabuleiro(partida.tab);
-                    Console.WriteLine();
-                    Console.Write("Origem: ");
-                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
-                    bool[,] possicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
-                    
-                    Console.Clear();
-                    Tela.imprimirtabuleiro(partida.tab, possicoesPossiveis);
-                    Console.Write("Destino: ");
-                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                    try
+                    {
+                        Console.Clear();
+                        Tela.imprimirtabuleiro(partida.tab);
+                        Console.WriteLine();
+                        Console.WriteLine("Turno: " + partida.turno);
+                        Console.WriteLine("Aguardanno jogada: " + partida.jogadorAtual);
 
-                    partida.executaMovimento(origem, destino);
+                        Console.WriteLine();
+                        Console.Write("Origem: ");
+                        Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaodeOrigem(origem);
+                        bool[,] possicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
+
+                        Console.Clear();
+                        Tela.imprimirtabuleiro(partida.tab, possicoesPossiveis);
+                        Console.Write("Destino: ");
+                        Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validaPosicaodeDestino(origem, destino);
+                        
+                        partida.realizaJogada(origem, destino);
+                    }
+                    catch(TabuleiroException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.ReadLine();
+                    }
                 }
             }
             catch (TabuleiroException ex)
