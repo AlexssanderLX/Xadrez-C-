@@ -52,17 +52,25 @@ namespace Xadrez_Console
         }
         public static void imprimirtabuleiro(Tabuleiro tab)
         {
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            ConsoleColor fundoClaro = ConsoleColor.Black;       // quase neutro
+            ConsoleColor fundoEscuro = ConsoleColor.DarkGray;   // tom suave
+
             for (int i = 0; i < tab.linhas; i++)
             {
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < tab.colunas; j++)
                 {
+                    Console.BackgroundColor = (i + j) % 2 == 0 ? fundoClaro : fundoEscuro;
                     imprimirPeca(tab.peca(i, j));
+                    Console.BackgroundColor = fundoOriginal;
                 }
                 Console.WriteLine();
             }
+            Console.BackgroundColor = fundoOriginal;
             Console.WriteLine("  a b c d e f g h");
         }
+
 
         public static PosicaoXadrez lerPosicaoXadrez()
         {
@@ -75,29 +83,31 @@ namespace Xadrez_Console
         {
             if (peca == null)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("- ");
             }
             else
             {
                 if (peca.cor == Cor.Branca)
                 {
-                    Console.Write(peca);
+                    Console.ForegroundColor = ConsoleColor.Cyan; // Mais suave
                 }
                 else
                 {
-                    ConsoleColor aux = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write(peca);
-                    Console.ForegroundColor = aux;
+                    Console.ForegroundColor = ConsoleColor.Yellow; // Suave para peças pretas
                 }
-                Console.Write(" ");
+                Console.Write(peca + " ");
             }
+            Console.ResetColor(); // sempre resetar depois
         }
+
         public static void imprimirtabuleiro(Tabuleiro tab, bool[,] possicoesPossiveis)
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
-            ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
-            
+            ConsoleColor fundoClaro = ConsoleColor.Black;
+            ConsoleColor fundoEscuro = ConsoleColor.DarkGray;
+            ConsoleColor fundoPossivel = ConsoleColor.Red; // cor de destaque suave
+
             for (int i = 0; i < tab.linhas; i++)
             {
                 Console.Write(8 - i + " ");
@@ -105,15 +115,15 @@ namespace Xadrez_Console
                 {
                     if (possicoesPossiveis[i, j])
                     {
-                        Console.BackgroundColor = fundoAlterado;
+                        Console.BackgroundColor = fundoPossivel;
                     }
                     else
                     {
-                        Console.BackgroundColor = fundoOriginal;
+                        Console.BackgroundColor = (i + j) % 2 == 0 ? fundoClaro : fundoEscuro;
                     }
+
                     imprimirPeca(tab.peca(i, j));
                     Console.BackgroundColor = fundoOriginal;
-
                 }
                 Console.WriteLine();
             }

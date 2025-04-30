@@ -1,6 +1,7 @@
 ﻿using tabuleiro;
 using Xadrez_Console;
 using Xadrez;
+using System.Text;
 namespace xadrez_console
 {
     class Program
@@ -9,6 +10,7 @@ namespace xadrez_console
         {
             try
             {
+                Console.OutputEncoding = Encoding.UTF8;
                 PartidadeXadrez partida = new PartidadeXadrez();
                 while (!partida.terminada)
                 {
