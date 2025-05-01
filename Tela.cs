@@ -54,7 +54,7 @@ namespace Xadrez_Console
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoClaro = ConsoleColor.Black;       // quase neutro
-            ConsoleColor fundoEscuro = ConsoleColor.DarkGray;   // tom suave
+            ConsoleColor fundoEscuro = ConsoleColor.Red;   // tom suave
 
             for (int i = 0; i < tab.linhas; i++)
             {
@@ -83,7 +83,7 @@ namespace Xadrez_Console
         {
             if (peca == null)
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("- ");
             }
             else
@@ -105,8 +105,8 @@ namespace Xadrez_Console
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoClaro = ConsoleColor.Black;
-            ConsoleColor fundoEscuro = ConsoleColor.DarkGray;
-            ConsoleColor fundoPossivel = ConsoleColor.Red; // cor de destaque suave
+            ConsoleColor fundoEscuro = ConsoleColor.Red;
+            ConsoleColor fundoPossivel = ConsoleColor.Blue; // cor de destaque suave
 
             for (int i = 0; i < tab.linhas; i++)
             {

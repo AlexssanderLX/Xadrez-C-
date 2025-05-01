@@ -17,7 +17,7 @@ namespace xadrez_console
                     {
                         Console.Clear();
                         Tela.imprimirPartida(partida);
-                        
+
                         Console.WriteLine();
                         Console.Write("Origem: ");
                         Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
@@ -29,10 +29,10 @@ namespace xadrez_console
                         Console.Write("Destino: ");
                         Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
                         partida.validaPosicaodeDestino(origem, destino);
-                        
+
                         partida.realizaJogada(origem, destino);
                     }
-                    catch(TabuleiroException ex)
+                    catch (TabuleiroException ex)
                     {
                         Console.WriteLine(ex.Message);
                         Console.ReadLine();
@@ -44,6 +44,10 @@ namespace xadrez_console
             catch (TabuleiroException ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + " < Ou um xegue não computado >");
             }
         }
     }
