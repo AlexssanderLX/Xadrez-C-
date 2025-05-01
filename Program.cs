@@ -10,7 +10,6 @@ namespace xadrez_console
         {
             try
             {
-                Console.OutputEncoding = Encoding.UTF8;
                 PartidadeXadrez partida = new PartidadeXadrez();
                 while (!partida.terminada)
                 {
