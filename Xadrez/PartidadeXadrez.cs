@@ -136,6 +136,23 @@ namespace Xadrez
                 desfazMovimento(origem, destino, pecaCapturada);
                 throw new TabuleiroException("Você não pode se colocar em xeque!!! ");
             }
+
+            Peca p = tab.peca(destino);
+
+            // promoção
+
+            if (p is Piao)
+            {
+                if ((p.cor == Cor.Branca && destino.linha == 0) || (p.cor == Cor.Preta && destino.linha == 7))
+                {
+                    p = tab.retirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(tab, p.cor);
+                    tab.colocarPeca(dama, destino);
+                    pecas.Add(dama);
+                }
+            }
+
             if (estaEmXeque(adversaria(jogadorAtual)))
             {
                 xeque = true;
@@ -154,7 +171,6 @@ namespace Xadrez
                 mudaJogador();
             }
 
-            Peca p = tab.peca(destino);
 
             // # jogador en passant
             if (p is Piao && (destino.linha == origem.linha - 2 || destino.linha == origem.linha + 2))
@@ -331,7 +347,7 @@ namespace Xadrez
             //peças brancas
             colocarNovaPeca('e', 1, new Rei(tab, Cor.Branca, this));
             colocarNovaPeca('a', 1, new Torre(tab, Cor.Branca));
-            colocarNovaPeca('h', 1, new Torre(tab, Cor.Branca));
+           /* colocarNovaPeca('h', 1, new Torre(tab, Cor.Branca));*/
 
             colocarNovaPeca('g', 1, new Cavalo(tab, Cor.Branca));
             colocarNovaPeca('f', 1, new Bispo(tab, Cor.Branca));
@@ -346,7 +362,7 @@ namespace Xadrez
             colocarNovaPeca('e', 2, new Piao(tab, Cor.Branca, this));
             colocarNovaPeca('f', 2, new Piao(tab, Cor.Branca, this));
             colocarNovaPeca('g', 2, new Piao(tab, Cor.Branca, this));
-            colocarNovaPeca('h', 2, new Piao(tab, Cor.Branca, this));
+            colocarNovaPeca('h', 2, new Piao(tab, Cor.Preta, this));
 
         }
     }
